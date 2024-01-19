@@ -82,21 +82,16 @@ export async function getScreenshot() {
     await closeButton.click();
   }
 
-  await Promise.race([
-    page.waitForSelector('button[title="Accept all"]'),
-    new Promise((r) => setTimeout(r, 10000))
-  ]);
+  page.waitForSelector('button[title="Accept all"]');
 
   const acceptButton = await page.$('button[title="Accept all"]');
 
-  if (acceptButton) {
-    console.log('accepting GDPR');
-    await acceptButton.click();
-    await page.waitForNavigation({
-      timeout: 10000,
-      waitUntil: 'networkidle2'
-    });
-  }
+  console.log('accepting GDPR');
+  await acceptButton.click();
+  await page.waitForNavigation({
+    timeout: 10000,
+    waitUntil: 'networkidle2'
+  });
 
   await page.waitForSelector('.charts-container');
 
