@@ -11,6 +11,7 @@ const execPromise = promisify(exec);
 export async function getVideo() {
   const browser = await puppeteer.launch({
     headless: 'new',
+    executablePath: 'google-chrome-stable',
     defaultViewport: {
       width: 1280,
       height: 720
