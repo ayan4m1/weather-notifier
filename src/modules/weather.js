@@ -78,13 +78,19 @@ export async function getScreenshot() {
   const closeButton = await page.$('button.close');
 
   if (closeButton) {
+    console.log('closing privacy modal');
     await closeButton.click();
   }
 
   const acceptButton = await page.$('button[title="Accept all"]');
 
   if (acceptButton) {
+    console.log('accepting GDPR');
     await acceptButton.click();
+    await page.waitForNavigation({
+      timeout: 10000,
+      waitUntil: 'networkidle2'
+    });
   }
 
   await page.waitForSelector('.charts-container');
