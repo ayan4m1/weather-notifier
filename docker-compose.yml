@@ -11,3 +11,5 @@ services:
       - WEA_SMTP_SECURE
       - WEA_SMTP_USERNAME
       - WEA_SMTP_PASSWORD
+    cap_add:
+    - SYS_ADMIN
