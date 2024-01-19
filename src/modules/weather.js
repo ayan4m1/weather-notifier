@@ -68,6 +68,13 @@ export async function getScreenshot() {
   });
   const page = await browser.newPage();
 
+  await page.setCookie({
+    domain: '.wunderground.com',
+    path: '/',
+    name: 'usprivacy',
+    value: '1YYN'
+  });
+
   await page.goto(url);
 
   await Promise.race([
@@ -79,17 +86,6 @@ export async function getScreenshot() {
 
   if (closeButton) {
     await closeButton.click();
-  } else {
-    console.dir(
-      await page.$$eval('a,button,span,div', (els) =>
-        els.map((el) => {
-          if (el.textContent.trim() === 'Accept all') {
-            console.dir(`removing modal of type ${el.nodeName}`);
-            el.click();
-          }
-        })
-      )
-    );
   }
 
   await page.waitForSelector('.charts-container');
