@@ -78,7 +78,9 @@ export async function getScreenshot() {
 
   const closeButton = await page.$('button.close');
 
-  await closeButton.click();
+  if (closeButton) {
+    await closeButton.click();
+  }
 
   await page.waitForSelector('.charts-container');
 
