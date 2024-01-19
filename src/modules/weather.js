@@ -68,7 +68,7 @@ export async function getScreenshot() {
   });
   const page = await browser.newPage();
 
-  await page.goto(url);
+  await page.goto(url, { waitUntil: 'networkidle0' });
 
   await Promise.race([
     page.waitForSelector('button.close'),
@@ -84,7 +84,7 @@ export async function getScreenshot() {
 
   await Promise.race([
     page.waitForSelector('button[title="Accept all"]'),
-    new Promise((r) => setTimeout(r, 5000))
+    new Promise((r) => setTimeout(r, 10000))
   ]);
 
   const acceptButton = await page.$('button[title="Accept all"]');
