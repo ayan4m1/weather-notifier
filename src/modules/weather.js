@@ -68,13 +68,6 @@ export async function getScreenshot() {
   });
   const page = await browser.newPage();
 
-  await page.setCookie({
-    domain: '.wunderground.com',
-    path: '/',
-    name: 'usprivacy',
-    value: '1YYN'
-  });
-
   await page.goto(url);
 
   await Promise.race([
@@ -86,6 +79,12 @@ export async function getScreenshot() {
 
   if (closeButton) {
     await closeButton.click();
+  }
+
+  const acceptButton = await page.$('button[title="Accept all"]');
+
+  if (acceptButton) {
+    await acceptButton.click();
   }
 
   await page.waitForSelector('.charts-container');
