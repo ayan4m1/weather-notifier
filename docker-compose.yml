@@ -1,0 +1,13 @@
+services:
+  bot:
+    image: weather-notifier
+    build: ./
+    restart: always
+    environment:
+      - WEA_LOG_LEVEL
+      - WEA_LOG_TIME_FMT
+      - WEA_SMTP_HOST
+      - WEA_SMTP_PORT
+      - WEA_SMTP_SECURE
+      - WEA_SMTP_USERNAME
+      - WEA_SMTP_PASSWORD
