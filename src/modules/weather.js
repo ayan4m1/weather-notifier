@@ -81,8 +81,13 @@ export async function getScreenshot() {
     await closeButton.click();
   } else {
     console.dir(
-      await page.$$eval('a[role="button"]', (els) =>
-        els.map((el) => el.textContent)
+      await page.$$eval('a,button,span,div', (els) =>
+        els.map((el) => {
+          if (el.textContent.trim() === 'Accept all') {
+            console.dir(`removing modal of type ${el.nodeName}`);
+            el.click();
+          }
+        })
       )
     );
   }
