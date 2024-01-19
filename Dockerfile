@@ -1,9 +1,7 @@
-FROM node:lts-alpine
+FROM node:lts
 
 WORKDIR /usr/src
 COPY . .
-
-RUN apk add chromium
 
 RUN npm ci
 
