@@ -80,6 +80,12 @@ export async function getScreenshot() {
 
   if (closeButton) {
     await closeButton.click();
+  } else {
+    console.dir(
+      (await page.$$('button')).map(
+        async (elem) => await elem.evaluate((el) => el.textContent)
+      )
+    );
   }
 
   await page.waitForSelector('.charts-container');
