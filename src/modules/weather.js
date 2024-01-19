@@ -82,7 +82,7 @@ export async function getScreenshot() {
     await closeButton.click();
   }
 
-  page.waitForSelector('button[title="Accept all"]');
+  await page.waitForSelector('button[title="Accept all"]');
 
   const acceptButton = await page.$('button[title="Accept all"]');
 
