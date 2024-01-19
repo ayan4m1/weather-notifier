@@ -81,7 +81,9 @@ export async function getScreenshot() {
     await closeButton.click();
   } else {
     console.dir(
-      await page.$$eval('button', (els) => els.map((el) => el.textContent))
+      await page.$$eval('a[role="button"]', (els) =>
+        els.map((el) => el.textContent)
+      )
     );
   }
 
