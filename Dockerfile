@@ -1,6 +1,6 @@
 FROM ghcr.io/puppeteer/puppeteer:latest
 
-WORKDIR /usr/src
+WORKDIR /home/pptruser/app
 
 COPY . .
 
