@@ -82,6 +82,11 @@ export async function getScreenshot() {
     await closeButton.click();
   }
 
+  await Promise.race([
+    page.waitForSelector('button[title="Accept all"]'),
+    new Promise((r) => setTimeout(r, 5000))
+  ]);
+
   const acceptButton = await page.$('button[title="Accept all"]');
 
   if (acceptButton) {
